@@ -125,6 +125,20 @@ data "aws_iam_policy_document" "github_actions_terraform" {
     ]
     resources = ["*"]
   }
+
+  statement {
+    sid    = "TerraformStateLocking"
+    effect = "Allow"
+    actions = [
+      "dynamodb:DescribeTable",
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:DeleteItem"
+    ]
+    resources = [
+      "arn:aws:dynamodb:${data.aws_caller_identity.current.account_id}:*:table/terraform-locks"
+    ]
+  }
 }
 
 # Attach the policy to the GitHub Actions role
