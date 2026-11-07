@@ -1,6 +1,8 @@
 # GitHub Actions OIDC Identity Provider and Role for CI/CD
 # Allows GitHub Actions to assume a role via OIDC for secure credential-less authentication
 
+data "aws_caller_identity" "current" {}
+
 locals {
   github_oidc_url          = "token.actions.githubusercontent.com"
   github_oidc_provider_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.github_oidc_url}"
