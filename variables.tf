@@ -7,6 +7,7 @@ variable "aws_region" {
 variable "github_org" {
   description = "GitHub organization name"
   type        = string
+  default     = "pro-digital-uk"
 }
 
 variable "sub_claim_patterns" {
